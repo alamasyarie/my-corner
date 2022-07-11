@@ -1,5 +1,8 @@
-const express = require('express')
-const mongoose = require('mongoose')
+import express from 'express'
+import mongoose from 'mongoose'
+import cors from 'cors'
+
+import LinksRouter from './routes/LinksRouter.js'
 
 const app = express()
 
@@ -17,6 +20,8 @@ const db = mongoose.connection
 db.on('error', (error) => console.log(error))
 db.once('open', () => console.log('Database conencted'))
 
-console.log('Hello world');
+app.use(cors)
+app.use(express.json())
+app.use(LinksRouter)
 
 app.listen(5000, () => console.log('Server running at port 5000'))
